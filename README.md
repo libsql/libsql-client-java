@@ -13,6 +13,22 @@ This is the source repository of the Java SDK for LibSQL. You can either connect
 
 ## Getting Started
 
+```java
+import org.libsql.client.Client;
+import org.libsql.client.ResultSet;
+
+// ...
+
+String url = "<insert URL here>";
+String authToken = "<insert auth token here>";
+Client client = Client.builder(url).authToken(authToken).build();
+ResultSet rs = client.execute("SELECT * FROM users");
+System.out.println(rs.columns);
+for (ResultSet.Row row : rs.rows) {
+    System.out.println(row.toString());
+}
+
+```
 ## License
 
 This project is licensed under the MIT license.
