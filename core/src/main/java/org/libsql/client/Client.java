@@ -3,6 +3,7 @@ package org.libsql.client;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
 
@@ -68,7 +69,7 @@ public class Client {
         byte[] input = body.getBytes("utf-8");
         os.write(input, 0, input.length);
       }
-      try (InputStreamReader in = new InputStreamReader(conn.getInputStream())) {
+      try (InputStreamReader in = new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8)) {
         Gson gson = new Gson();
         Response[] response = gson.fromJson(in, Response[].class);
         ResultSet[] resultSets = new ResultSet[response.length];
